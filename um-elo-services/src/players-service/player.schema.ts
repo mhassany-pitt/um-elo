@@ -6,7 +6,10 @@ export type PlayerDocument = HydratedDocument<Player>;
 @Schema()
 export class Player {
 
-  id?: string;
+  id?: string; // used by useId(...)
+
+  @Prop({ required: true })
+  pool_id: string;
 
   @Prop({ required: true })
   name: string;

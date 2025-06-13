@@ -19,12 +19,11 @@ export class MatchesService {
     const player = await this.players.find(match.player_id);
     const opponent = await this.players.find(match.opponent_id);
     new EloBase(player, opponent, match.player_score).update();
-    await this.players.update(player);
-    await this.players.update(opponent);
+    await this.players.update(player.id, player);
+    await this.players.update(opponent.id, opponent);
   }
 
   async find(id: string): Promise<Match> {
-    const match = await this.model.findById(id).exec();
-    return useId(match.toObject());
+    return useId((await this.model.findOne({ _id: id }))?.toObject());
   }
 }

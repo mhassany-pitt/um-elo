@@ -14,7 +14,7 @@ export class MatchesController {
   @Post()
   async record(@Body() match: Match) {
     await this.matches.record(match);
-    return {
+    return { // report back
       player: await this.players.find(match.player_id),
       opponent: await this.players.find(match.opponent_id),
     };

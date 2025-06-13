@@ -4,6 +4,8 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { MatchesModule } from 'src/matches/matches.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { PlayersModule } from 'src/players/players.module';
+import { IdExistsConstraint } from 'src/validators/id-exists.validator';
+import { PoolsModule } from 'src/pools/pools.module';
 
 @Module({
   imports: [
@@ -18,10 +20,11 @@ import { PlayersModule } from 'src/players/players.module';
         uri: configService.get<string>('MONGODB_URI'),
       }),
     }),
+    PoolsModule,
     PlayersModule,
     MatchesModule,
   ],
   controllers: [AppController],
-  providers: [],
+  providers: [IdExistsConstraint],
 })
 export class AppModule { }

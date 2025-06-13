@@ -6,7 +6,13 @@ export type MatchDocument = HydratedDocument<Match>;
 @Schema()
 export class Match {
 
-  id?: string;
+  id?: string; // used by useId(...)
+
+  @Prop({ required: true })
+  pool_id: string;
+
+  @Prop({ required: true })
+  datetime: Date;
 
   @Prop({ required: true })
   player_id: string;

@@ -20,14 +20,10 @@ export class PlayersService {
   }
 
   async find(id: string): Promise<Player> {
-    const player = await this.model.findOne({ _id: id });
-    return useId<Player>(player?.toObject());
+    return useId<Player>((await this.model.findOne({ _id: id }))?.toObject());
   }
 
-  async update(player: Player): Promise<void> {
-    await this.model.updateOne(
-      { _id: player.id },
-      { $set: { rating: player.rating, num_of_matches: player.num_of_matches } },
-    );
+  async update(id: string, player: Player): Promise<void> {
+    await this.model.updateOne({ _id: id }, { $set: { rating: player.rating, num_of_matches: player.num_of_matches } });
   }
 }

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
 import { PlayersService } from 'src/players-service/players.service';
 import { Player } from './player.dto';
 
@@ -17,5 +17,11 @@ export class PlayersController {
   @Get(':id')
   async find(@Param('id') id: string): Promise<Player> {
     return await this.service.find(id);
+  }
+
+  @Patch(':id')
+  async update(@Param('id') id: string, @Body() player: Player): Promise<Player> {
+    await this.service.update(id, player);
+    return this.service.find(id);
   }
 }
