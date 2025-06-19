@@ -1,5 +1,5 @@
-import { Transform, Type } from "class-transformer";
-import { IsDate, IsDateString, IsNotEmpty, IsNumber, Length, Max, MaxLength, Min, MinLength } from "class-validator";
+import { Type } from "class-transformer";
+import { IsDate, IsNotEmpty, IsNumber, Length, Max, Min } from "class-validator";
 import { Player } from "src/players-service/player.schema";
 import { Pool } from "src/pools-services/pool.schema";
 import { IdExists } from "src/validators/id-exists.decorator";
