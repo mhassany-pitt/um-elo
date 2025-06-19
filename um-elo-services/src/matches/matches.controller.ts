@@ -13,11 +13,10 @@ export class MatchesController {
 
   @Post()
   async record(@Body() match: Match) {
-    await this.matches.record(match);
-    return { // report back
-      player: await this.players.find(match.player_id),
-      opponent: await this.players.find(match.opponent_id),
-    };
+    const expected_scores = await this.matches.record(match);
+    const player = await this.players.find(match.player_id);
+    const opponent = await this.players.find(match.opponent_id);
+    return { expected_scores, player, opponent };
   }
 
   @Get(':id')

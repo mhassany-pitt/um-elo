@@ -1,3 +1,4 @@
+import { ExpectedScores } from "src/matches/expected-scores.dto";
 import { Player } from "src/players/player.dto";
 
 export class EloBase {
@@ -17,7 +18,7 @@ export class EloBase {
     return rating + k * (actual_score - expected_score);
   }
 
-  update() {
+  update(): ExpectedScores {
     const player_expected_score = this.calc_expected_score(this.player.rating, this.opponent.rating);
     const opponent_expected_score = this.calc_expected_score(this.opponent.rating, this.player.rating);
 
@@ -28,5 +29,10 @@ export class EloBase {
     this.player.num_of_matches++;
     this.opponent.rating = opponent_new_rating;
     this.opponent.num_of_matches++;
+
+    return {
+      player: player_expected_score,
+      opponent: opponent_expected_score,
+    }
   }
 }
